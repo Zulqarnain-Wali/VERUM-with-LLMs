@@ -1,0 +1,28 @@
+/* ==========================================================================
+   VERUM — Home Page Styles
+   ========================================================================== */
+
+/* Hard 3D card interactions */
+.hard-3d {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Staggered flip-in entrance animations */
+.flip-in {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(-90deg);
+    transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: top center;
+}
+.flip-in.visible {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+/* Stagger delay utilities */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }

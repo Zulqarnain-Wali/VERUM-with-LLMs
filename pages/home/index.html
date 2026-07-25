@@ -1,0 +1,394 @@
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;cursor:none;}body{overscroll-behavior:none;background-color:#121414;overflow-x:hidden;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Custom Multi-element Cursor */
+.cursor-dot {width:6px;height:6px;background-color:#e9c349;border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transform:translate(-50%, -50%);transition:transform 0.05s linear;}
+.cursor-outline {width:40px;height:40px;border:1px solid rgba(233, 195, 73, 0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%, -50%);transition:width 0.2s, height 0.2s, background-color 0.2s, box-shadow 0.2s; transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);}
+.cursor-hover .cursor-outline {width:60px;height:60px;background-color:rgba(233, 195, 73, 0.1);border-color:#e9c349;box-shadow:0 0 20px rgba(233, 195, 73, 0.4);}
+
+.nav-container{perspective:1000px;}.tilt-nav{transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);transform-style:preserve-3d;}.tilt-nav:hover{transform:rotateX(5deg) rotateY(-2deg);}.glass-card{backdrop-filter:blur(12px);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
+
+/* Hard 3D Interactions */
+.hard-3d {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Staggered Flip-in Animations */
+.flip-in {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(-90deg);
+    transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: top center;
+}
+.flip-in.visible {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"error":"#ffb4ab","inverse-on-surface":"#2f3131","primary-fixed-dim":"#cbc5c3","tertiary-container":"#0e0b0a","outline":"#998f8a","primary-container":"#0d0b0a","inverse-primary":"#615d5c","on-primary":"#33302e","on-tertiary-fixed":"#1e1b1a","on-secondary":"#3c2f00","on-primary-fixed":"#1d1b1a","surface-container-highest":"#343535","inverse-surface":"#e3e2e2","secondary":"#e9c349","on-background":"#e3e2e2","surface-container-lowest":"#0d0e0f","surface-container":"#1e2020","on-error-container":"#ffdad6","on-surface-variant":"#d0c4bf","on-secondary-container":"#342800","outline-variant":"#4d4541","on-secondary-fixed-variant":"#574500","on-primary-container":"#7e7977","error-container":"#93000a","primary":"#cbc5c3","secondary-fixed":"#ffe088","on-tertiary-fixed-variant":"#4a4644","on-error":"#690005","on-tertiary":"#342f2e","primary-fixed":"#e8e1df","surface-dim":"#121414","tertiary":"#ccc5c3","tertiary-fixed-dim":"#ccc5c3","surface-container-low":"#1a1c1c","on-secondary-fixed":"#241a00","secondary-fixed-dim":"#e9c349","surface":"#121414","secondary-container":"#af8d11","on-primary-fixed-variant":"#494645","on-surface":"#e3e2e2","tertiary-fixed":"#e9e1de","surface-variant":"#343535","surface-container-high":"#292a2a","on-tertiary-container":"#7f7977","surface-tint":"#cbc5c3","surface-bright":"#38393a","background":"#121414"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"container-max":"1440px","unit":"8px","margin-desktop":"80px","gutter":"24px","margin-mobile":"20px"},"fontFamily":{"data-mono":["Inter"],"body-lg":["Inter"],"label-caps":["Inter"],"headline-md":["Playfair Display"],"headline-lg":["Playfair Display"],"body-md":["Inter"],"headline-sm":["Playfair Display"],"headline-lg-mobile":["Playfair Display"]},"fontSize":{"data-mono":["14px",{"lineHeight":"1.0","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}],"label-caps":["12px",{"lineHeight":"1.0","letterSpacing":"0.1em","fontWeight":"600"}],"headline-md":["32px",{"lineHeight":"1.3","fontWeight":"600"}],"headline-lg":["48px",{"lineHeight":"1.2","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"1.6","fontWeight":"400"}],"headline-sm":["24px",{"lineHeight":"1.4","fontWeight":"600"}],"headline-lg-mobile":["32px",{"lineHeight":"1.2","fontWeight":"700"}]}}}}</script>
+<!-- WebGL Shader Component -->
+<script type="module">
+    class WebGLShaderElement extends HTMLElement {
+        connectedCallback() {
+            const src = this.getAttribute('src');
+            const canvas = document.createElement('canvas');
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            this.appendChild(canvas);
+            
+            const gl = canvas.getContext('webgl');
+            if (!gl) return;
+
+            // Basic setup for shader rendering
+            const vsSource = `
+                attribute vec4 aVertexPosition;
+                varying vec2 v_texCoord;
+                void main() {
+                    gl_Position = aVertexPosition;
+                    v_texCoord = aVertexPosition.xy * 0.5 + 0.5;
+                }
+            `;
+            const fsSource = src; // In a real scenario, fetch this or handle inline
+
+            // Mock compilation and rendering loop for visual representation
+            // Actual implementation would compile shaders and run requestAnimationFrame
+            canvas.style.backgroundColor = '#121414'; // Fallback
+        }
+    }
+    customElements.define('webgl-shader', WebGLShaderElement);
+</script>
+</head><body class="bg-background font-body-md text-on-surface overflow-x-hidden">
+<!-- STITCH_SHADER_START:ANIMATION_28 class="fixed inset-0 w-full h-full -z-10" -->
+<div class="fixed inset-0 w-full h-full -z-10" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_28" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_28');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+float grid(vec2 uv, float res) {
+    vec2 grid = fract(uv * res);
+    return smoothstep(0.02, 0.0, grid.x) + smoothstep(0.02, 0.0, grid.y);
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 mouse = u_mouse / u_resolution;
+    
+    // Hard 3D Geometric Grid
+    vec2 p = uv - 0.5;
+    p.x *= u_resolution.x / u_resolution.y;
+    
+    // Perspective distortion based on mouse
+    float dist = length(uv - mouse);
+    vec2 offset = (uv - mouse) * 0.05 / (1.0 + dist * 5.0);
+    vec2 distortedUV = uv + offset;
+    
+    float g1 = grid(distortedUV, 20.0);
+    float g2 = grid(distortedUV, 40.0) * 0.5;
+    
+    // Interaction ripple
+    float ripple = sin(dist * 20.0 - u_time * 2.0) * 0.5 + 0.5;
+    ripple *= smoothstep(0.5, 0.0, dist);
+    
+    vec3 baseColor = vec3(0.05, 0.04, 0.04); // Deep Mahogany
+    vec3 accentColor = vec3(0.83, 0.69, 0.22); // Gold
+    
+    float intensity = (g1 + g2) * 0.15 + (ripple * 0.05);
+    vec3 finalColor = mix(baseColor, accentColor, intensity);
+    
+    // Vignette
+    finalColor *= smoothstep(1.5, 0.5, length(uv - 0.5));
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_28 -->
+<div class="cursor-dot hidden lg:block" id="cursor-dot"></div>
+<div class="cursor-outline hidden lg:block" id="cursor-outline"></div>
+<header class="fixed top-0 w-full z-50 nav-container flip-in visible">
+<div class="tilt-nav mx-auto mt-4 px-4 sm:px-8 w-full max-w-7xl">
+<div class="h-16 glass-card rounded-xl px-4 sm:px-8 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-4 interactive-target">
+<img alt="VERUM Luxury Logo" class="h-8 w-auto object-contain rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRsMovE5HdMB8jh7Ifjstt61hi-60D2nQ6jSv7YgQilVb0-UKVo9bhwz8BCaU-X-SiuGtkYtmRKc7yU7IJ_LzTQZ9fwtEvz99OjdJ59YLRZ_mv9unDf5S8QLKK-_kRbsow5-Pq3u2MhYb-zXXex1oVWrbA6ecoPCe5YdXZLK9MkqtGC5350zblshsQfUf3bYZskLH5Tw-p1hQZ_ltJg8zjqEeW7bqoiiH26FMc_9GDdXNpZopoyQjeaWduEy5u60af3sa0mSH54lYo"/>
+<span class="font-headline-sm text-secondary tracking-widest uppercase hidden sm:block">VERUM</span>
+</div>
+<nav class="hidden lg:flex items-center gap-6" data-active-classes="text-secondary font-semibold">
+<a aria-current="page" class="transition-all uppercase text-secondary font-semibold interactive-target" href="../home/index.html">Home</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../about/index.html">About</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../ecosystem/index.html">Ecosystem</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../gallery/index.html">Gallery</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../executive-team/index.html">Team</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../faq-reviews/index.html">FAQ</a>
+<a class="text-label-caps text-on-surface-variant hover:text-secondary transition-all uppercase interactive-target" href="../contact/index.html">Contact</a>
+</nav>
+<div class="flex items-center gap-4 sm:gap-6">
+<button class="flex items-center text-on-surface-variant hover:text-secondary transition-colors interactive-target" onclick="document.documentElement.classList.toggle('dark')"><span class="material-symbols-outlined">contrast</span></button>
+<button class="hidden sm:block px-6 py-2 border border-secondary text-secondary font-label-caps hover:bg-secondary hover:text-on-secondary hover:shadow-[0_0_20px_rgba(233,195,73,0.5)] transition-all rounded-full interactive-target">CONNECT WALLET</button>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center interactive-target cursor-pointer hover:bg-secondary transition-colors"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 min-h-screen flex flex-col w-full relative">
+<div class="flex flex-col w-full flex-grow relative">
+<!-- Hero Canvas -->
+<section class="relative w-full min-h-[calc(100vh-6rem)] flex flex-col justify-center overflow-hidden">
+<div class="w-full px-4 sm:px-8 lg:px-margin-desktop max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter relative z-10">
+<!-- Left Content Column -->
+<div class="col-span-1 lg:col-span-7 flex flex-col justify-center space-y-8 lg:space-y-12 py-12 lg:py-0">
+<div class="space-y-6 flip-in delay-100">
+<div class="flex items-center gap-4">
+<div class="h-[1px] w-12 bg-secondary"></div>
+<span class="font-data-mono text-label-caps text-secondary tracking-[0.3em]">ESTABLISHED MMXXIV</span>
+</div>
+<h1 class="font-headline-lg-mobile lg:font-headline-lg text-on-surface max-w-2xl leading-[1.1] [text-wrap:balance]">
+                        The Architecture of <span class="text-secondary italic">Financial Sovereignty.</span>
+</h1>
+<p class="font-body-md lg:font-body-lg text-on-surface-variant max-w-lg">
+                        Premium Web3 infrastructure engineered for the discerning digital architect. Secure your legacy in the decentralized frontier with institutional-grade protocols.
+                    </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center flip-in delay-200">
+<button class="hard-3d interactive-target group relative px-8 sm:px-10 py-4 sm:py-5 bg-secondary overflow-hidden rounded-full transition-all hover:shadow-[0_0_40px_rgba(233,195,73,0.6)] w-full sm:w-auto text-center">
+<div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="relative font-label-caps text-on-secondary text-sm tracking-widest">EXPLORE ECOSYSTEM</span>
+</button>
+<button class="hard-3d interactive-target px-8 sm:px-10 py-4 sm:py-5 border border-outline-variant hover:border-secondary hover:text-secondary hover:shadow-[0_0_20px_rgba(233,195,73,0.3)] transition-all rounded-full font-label-caps text-sm tracking-widest group flex items-center justify-center gap-3 w-full sm:w-auto">
+                        READ MANIFESTO
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">north_east</span>
+</button>
+</div>
+</div>
+<!-- Right Visual Column (Floating Glass Layers) -->
+<div class="col-span-1 lg:col-span-5 relative min-h-[400px] lg:min-h-[500px] perspective-1000 hidden md:block flip-in delay-300" id="parallax-container">
+<!-- Layer 3: Top/Front -->
+<div class="absolute top-[10%] lg:top-[15%] left-[5%] lg:left-[10%] w-56 lg:w-72 h-80 lg:h-96 glass-card rounded-2xl p-6 transform rotate-[-8deg] translate-z-20 transition-transform duration-700 ease-out parallax-layer" data-speed="0.05">
+<div class="w-full h-full border border-secondary/20 rounded-xl flex flex-col justify-between p-4 bg-gradient-to-br from-white/5 to-transparent">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-2xl lg:text-3xl">shield_with_heart</span>
+<span class="font-data-mono text-[10px] text-on-surface-variant">SECURE_LAYER_01</span>
+</div>
+<div class="space-y-2">
+<div class="h-1 w-1/2 bg-secondary/30 rounded-full"></div>
+<div class="h-1 w-full bg-outline-variant/20 rounded-full"></div>
+<div class="h-1 w-3/4 bg-outline-variant/20 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Layer 2: Middle -->
+<div class="absolute top-[20%] lg:top-[25%] left-[25%] lg:left-[30%] w-56 lg:w-72 h-80 lg:h-96 glass-card rounded-2xl p-6 transform rotate-[5deg] translate-z-10 transition-transform duration-700 ease-out parallax-layer" data-speed="0.03">
+<div class="w-full h-full border border-white/10 rounded-xl flex flex-col justify-center items-center space-y-4">
+<div class="relative">
+<div class="absolute inset-0 bg-secondary/20 blur-xl rounded-full animate-pulse"></div>
+<span class="material-symbols-outlined text-secondary text-4xl lg:text-5xl relative z-10">layers</span>
+</div>
+<span class="font-label-caps text-[10px] tracking-widest opacity-60">DISTRIBUTED CONSENSUS</span>
+</div>
+</div>
+<!-- Layer 1: Back -->
+<div class="absolute top-[30%] lg:top-[35%] left-[15%] lg:left-[20%] w-56 lg:w-72 h-80 lg:h-96 glass-card rounded-2xl p-6 transform rotate-[12deg] transition-transform duration-700 ease-out parallax-layer" data-speed="0.01">
+<div class="w-full h-full border border-white/5 rounded-xl opacity-40">
+<div class="grid grid-cols-4 gap-2 p-4">
+<div class="aspect-square bg-white/10 rounded-sm"></div>
+<div class="aspect-square bg-white/10 rounded-sm"></div>
+<div class="aspect-square bg-white/10 rounded-sm"></div>
+<div class="aspect-square bg-white/10 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Stats Bar -->
+<div class="absolute bottom-8 lg:bottom-12 left-4 sm:left-8 lg:left-margin-desktop z-20 right-4 sm:right-auto flip-in delay-200">
+<div class="hard-3d glass-card p-1 rounded-full flex flex-col sm:flex-row items-center gap-1 shadow-2xl border border-white/5">
+<div class="bg-surface-container-high px-6 sm:px-8 py-3 sm:py-4 rounded-full flex flex-row items-center gap-4 sm:gap-8 w-full sm:w-auto justify-between">
+<div class="flex flex-col">
+<span class="text-label-caps text-on-surface-variant opacity-50 scale-75 origin-left whitespace-nowrap">TOTAL VALUE LOCKED</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-secondary text-lg sm:text-2xl">$4.2B</span>
+<span class="font-data-mono text-[10px] text-green-400">+2.4%</span>
+</div>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant/30 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="text-label-caps text-on-surface-variant opacity-50 scale-75 origin-left whitespace-nowrap">ACTIVE NODES</span>
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-on-surface text-lg sm:text-2xl">12,402</span>
+<div class="flex gap-1">
+<div class="w-1 h-1 rounded-full bg-secondary animate-bounce" style="animation-delay: 0s"></div>
+<div class="w-1 h-1 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.2s"></div>
+<div class="w-1 h-1 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 py-2 sm:py-0 flex items-center gap-3 w-full sm:w-auto justify-center">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+</span>
+<span class="font-data-mono text-[10px] tracking-tighter text-secondary whitespace-nowrap">PROTOCOL ONLINE</span>
+</div>
+</div>
+</div>
+</section>
+</div></main>
+<footer class="bg-surface-container-low border-t border-outline-variant/10 py-12 lg:py-16 relative z-10 flip-in"><div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-12"><div class="space-y-6"><div class="flex items-center gap-3"><img class="h-6 w-auto object-contain rounded-sm opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRsMovE5HdMB8jh7Ifjstt61hi-60D2nQ6jSv7YgQilVb0-UKVo9bhwz8BCaU-X-SiuGtkYtmRKc7yU7IJ_LzTQZ9fwtEvz99OjdJ59YLRZ_mv9unDf5S8QLKK-_kRbsow5-Pq3u2MhYb-zXXex1oVWrbA6ecoPCe5YdXZLK9MkqtGC5350zblshsQfUf3bYZskLH5Tw-p1hQZ_ltJg8zjqEeW7bqoiiH26FMc_9GDdXNpZopoyQjeaWduEy5u60af3sa0mSH54lYo"/><span class="font-headline-sm text-on-surface">VERUM</span></div><p class="text-body-md text-on-surface-variant max-w-xs">The nexus of digital sovereignty and opulent finance. Bridging the gap between traditional prestige and the decentralized frontier.</p></div><div class="space-y-6"><h4 class="text-label-caps text-secondary">NEWSLETTER</h4><div class="flex border-b border-secondary/30 pb-2"><input class="bg-transparent w-full text-on-surface outline-none font-data-mono text-xs focus:border-secondary transition-colors" placeholder="EXECUTIVE@VERUM.IO" type="email"/><button class="text-secondary hover:translate-x-1 transition-transform interactive-target"><span class="material-symbols-outlined">arrow_forward</span></button></div></div><div class="space-y-6 md:text-right flex flex-col md:items-end"><h4 class="text-label-caps text-secondary">PROTOCOL</h4><div class="flex gap-6"><a class="text-on-surface-variant hover:text-secondary hover:shadow-[0_0_10px_rgba(233,195,73,0.5)] transition-all rounded-full interactive-target" href="#"><span class="material-symbols-outlined">hub</span></a><a class="text-on-surface-variant hover:text-secondary hover:shadow-[0_0_10px_rgba(233,195,73,0.5)] transition-all rounded-full interactive-target" href="#"><span class="material-symbols-outlined">token</span></a><a class="text-on-surface-variant hover:text-secondary hover:shadow-[0_0_10px_rgba(233,195,73,0.5)] transition-all rounded-full interactive-target" href="#"><span class="material-symbols-outlined">public</span></a></div><p class="text-label-caps text-on-surface-variant opacity-50">VERUM PROTOCOL © 2024</p></div></div></footer>
+<script>
+    // Custom Cursor Logic
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorOutline = document.getElementById('cursor-outline');
+    const interactiveTargets = document.querySelectorAll('.interactive-target, a, button, input');
+
+    document.addEventListener('mousemove', (e) => {
+        cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        cursorOutline.style.left = `${e.clientX}px`;
+        cursorOutline.style.top = `${e.clientY}px`;
+    });
+
+    interactiveTargets.forEach(target => {
+        target.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-hover');
+        });
+        target.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-hover');
+        });
+    });
+
+    // Hard 3D Effect for elements with .hard-3d class
+    const hard3DElements = document.querySelectorAll('.hard-3d');
+    
+    document.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        
+        hard3DElements.forEach(el => {
+            el.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg) scale(1.02)`;
+        });
+    });
+    
+    // Reset Hard 3D on mouse leave
+    document.addEventListener('mouseleave', () => {
+        hard3DElements.forEach(el => {
+            el.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
+        });
+    });
+
+    // Intersection Observer for flip-in animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.flip-in').forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Original Parallax logic for background layers
+    document.addEventListener('mousemove', (e) => {
+        const container = document.getElementById('parallax-container');
+        if(!container) return;
+        const layers = document.querySelectorAll('.parallax-layer');
+        
+        const mouseX = (e.clientX / window.innerWidth) - 0.5;
+        const mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+        layers.forEach(layer => {
+            const speed = layer.getAttribute('data-speed');
+            const x = mouseX * speed * 1000;
+            const y = mouseY * speed * 1000;
+            const rotation = layer.classList.contains('rotate-[-8deg]') ? -8 : (layer.classList.contains('rotate-[5deg]') ? 5 : 12);
+            
+            layer.style.transform = `translate(${x}px, ${y}px) rotate(${rotation + (mouseX * 5)}deg)`;
+        });
+    });
+</script></body></html>

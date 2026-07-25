@@ -1,0 +1,443 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../styles/shared.css"/>
+<link rel="stylesheet" href="../../styles/gallery.css"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "error": "#ffb4ab",
+        "inverse-on-surface": "#2f3131",
+        "primary-fixed-dim": "#cbc5c3",
+        "tertiary-container": "#0e0b0a",
+        "outline": "#998f8a",
+        "primary-container": "#0d0b0a",
+        "inverse-primary": "#615d5c",
+        "on-primary": "#33302e",
+        "on-tertiary-fixed": "#1e1b1a",
+        "on-secondary": "#3c2f00",
+        "on-primary-fixed": "#1d1b1a",
+        "surface-container-highest": "var(--surface-highest)",
+        "inverse-surface": "#e3e2e2",
+        "secondary": "var(--gold)",
+        "on-background": "var(--on-surface)",
+        "surface-container-lowest": "#0d0e0f",
+        "surface-container": "var(--surface-container)",
+        "on-error-container": "#ffdad6",
+        "on-surface-variant": "var(--on-surface-var)",
+        "on-secondary-container": "#342800",
+        "outline-variant": "var(--outline-var)",
+        "on-secondary-fixed-variant": "#574500",
+        "on-primary-container": "#7e7977",
+        "error-container": "#93000a",
+        "primary": "#cbc5c3",
+        "secondary-fixed": "var(--gold-light)",
+        "on-tertiary-fixed-variant": "#4a4644",
+        "on-error": "#690005",
+        "on-tertiary": "#342f2e",
+        "primary-fixed": "#e8e1df",
+        "surface-dim": "var(--surface-low)",
+        "tertiary": "#ccc5c3",
+        "tertiary-fixed-dim": "#ccc5c3",
+        "surface-container-low": "var(--surface-container-low)",
+        "on-secondary-fixed": "#241a00",
+        "secondary-fixed-dim": "var(--gold)",
+        "surface": "var(--surface)",
+        "secondary-container": "#af8d11",
+        "on-primary-fixed-variant": "#494645",
+        "on-surface": "var(--on-surface)",
+        "tertiary-fixed": "#e9e1de",
+        "surface-variant": "var(--surface-container)",
+        "surface-container-high": "var(--surface-container-high)",
+        "on-tertiary-container": "#7f7977",
+        "surface-tint": "#cbc5c3",
+        "surface-bright": "var(--surface-high)",
+        "background": "var(--bg)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "unit": "8px",
+        "margin-desktop": "80px",
+        "gutter": "24px",
+        "margin-mobile": "20px"
+      },
+      "fontFamily": {
+        "data-mono": ["Inter"],
+        "body-lg": ["Inter"],
+        "label-caps": ["Inter"],
+        "headline-md": ["Playfair Display"],
+        "headline-lg": ["Playfair Display"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Playfair Display"],
+        "headline-lg-mobile": ["Playfair Display"]
+      },
+      "fontSize": {
+        "data-mono": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-background font-body-md text-on-surface overflow-x-hidden">
+<!-- Interactive Background Shader -->
+<!-- STITCH_SHADER_START:ANIMATION_20 class="fixed inset-0 w-full h-full -z-10 pointer-events-none" -->
+<div class="fixed inset-0 w-full h-full -z-10 pointer-events-none" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_20" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_20');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 mouse = u_mouse / u_resolution;
+    
+    // Create a subtle grid pattern
+    vec2 grid = fract(uv * 40.0 + (mouse - 0.5) * 0.5);
+    float line = smoothstep(0.02, 0.0, grid.x) + smoothstep(0.02, 0.0, grid.y);
+    
+    // Add glowing "nodes" at intersections
+    float node = smoothstep(0.1, 0.0, length(grid - 0.5));
+    
+    // Luxury color palette: Deep Mahogany to Gold accents
+    vec3 baseColor = vec3(0.05, 0.04, 0.04); // Deep charcoal/mahogany
+    vec3 accentColor = vec3(0.83, 0.69, 0.22); // Champagne Gold (#D4AF37)
+    
+    // Pulse effect based on time and mouse proximity
+    float dist = length(uv - mouse);
+    float pulse = sin(u_time * 0.5 - dist * 5.0) * 0.5 + 0.5;
+    
+    vec3 finalColor = mix(baseColor, accentColor, (line * 0.05 + node * 0.1) * pulse);
+    
+    // Subtle vignette
+    float vignette = smoothstep(1.2, 0.4, length(uv - 0.5));
+    finalColor *= vignette;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_20 -->
+<!-- Custom Cursor Elements --><div class="cursor-dot" id="cursor-dot"></div><div class="cursor-ring" id="cursor-ring"></div>
+
+<header class="fixed top-0 w-full z-50 nav-container" id="main-header">
+  <div class="tilt-nav mx-auto mt-3 max-w-[1440px] px-4 sm:px-6 lg:px-16">
+    <div class="nav-pill h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a class="flex items-center gap-3 shrink-0" href="../home/index.html">
+        <img alt="VERUM Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm text-secondary tracking-widest uppercase hidden sm:block">VERUM</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7" id="desktop-nav">
+        <a class="nav-link" href="../home/index.html">Home</a>
+        <a class="nav-link" href="../about/index.html">About</a>
+        <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+        <a class="nav-link active" href="../gallery/index.html" aria-current="page">Gallery</a>
+        <a class="nav-link" href="../executive-team/index.html">Team</a>
+        <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+        <a class="nav-link" href="../contact/index.html">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button aria-label="Toggle theme" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-on-surface-variant hover:text-secondary hover:border-secondary transition-all" id="theme-toggle" onclick="toggleTheme()">
+          <span class="material-symbols-outlined text-[20px]" id="theme-icon">contrast</span>
+        </button>
+        <button class="hidden sm:flex items-center px-5 py-2 border border-secondary text-secondary font-label-caps text-[11px] tracking-widest hover:bg-secondary hover:text-on-secondary hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] transition-all rounded-full">CONNECT WALLET</button>
+        <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:bg-secondary transition-colors shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <button aria-label="Open menu" class="hamburger-btn lg:hidden" id="hamburger" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-drawer" id="mobile-nav">
+  <button class="absolute top-6 right-6 text-on-surface-variant hover:text-secondary" onclick="toggleMobileNav()">
+    <span class="material-symbols-outlined text-3xl">close</span>
+  </button>
+  <a class="nav-link" href="../home/index.html">Home</a>
+  <a class="nav-link" href="../about/index.html">About</a>
+  <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+  <a class="nav-link active" href="../gallery/index.html">Gallery</a>
+  <a class="nav-link" href="../executive-team/index.html">Team</a>
+  <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+  <a class="nav-link" href="../contact/index.html">Contact</a>
+  <button class="mt-4 px-8 py-3 border border-secondary text-secondary font-label-caps text-sm tracking-widest hover:bg-secondary hover:text-on-secondary transition-all rounded-full">CONNECT WALLET</button>
+</div>
+<main class="pt-24 min-h-screen relative z-10">
+<div class="flex flex-col w-full">
+<!-- Header Section: Typographic Texture & Contrast -->
+<section class="relative px-margin-desktop py-24 overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-5%] w-[40%] h-[60%] rounded-full bg-secondary blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] rounded-full bg-primary blur-[100px]"></div>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-gutter">
+<div class="max-w-2xl float-animation">
+<span class="font-data-mono text-label-caps text-secondary mb-4 block tracking-[0.3em]">VISUALIZING THE INVISIBLE</span>
+<h1 class="font-headline-lg text-on-surface leading-none mb-6">Visual Protocol Architecture</h1>
+<p class="font-body-lg text-on-surface-variant max-w-lg">
+                            A curated collection of conceptual representations defining the Verum ecosystem. Each piece reflects the convergence of immutable security and artisanal finance.
+                        </p>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-[64px] text-outline/10 leading-none select-none">01 // GRID</span>
+<div class="h-[1px] w-32 bg-secondary/30 mt-2"></div>
+</div>
+</div>
+</section>
+<!-- Masonry-style Bento Grid -->
+<section class="px-margin-desktop pb-32">
+<div class="grid grid-cols-12 gap-gutter auto-rows-[280px]">
+<!-- Card 01: Quantum Bridge (Large) -->
+<div class="col-span-12 md:col-span-8 row-span-2 group relative overflow-hidden rounded-xl bg-surface-container glass-card transition-all duration-700">
+<div class="absolute inset-0 z-0 scale-105 group-hover:scale-100 transition-transform duration-1000">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" data-alt="A cinematic, ultra-high-definition conceptual art piece representing a 'Quantum Bridge'. Beams of concentrated champagne-gold light arc across a dark mahogany void, connecting two crystalline floating monoliths. The style is minimalist and architectural with soft bokeh particles, deep shadows, and subtle lens flares. 8k resolution, luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlFZgl2zJ_n6aeE4UQ0ll62XaoQSG3NneosbhSssJiVFSxky5P2nXu54tK4C8LylqKodjEzqUX9BkbQp6jJE9YizCPkGYJEai_oAzGFZG_DPPKMcA-6iC1ijIn_Xz-dXKRA6SocYjSaikVeuSMiV6ykbLGZ12qiU3LKTJ1HIxX23tXkzhSUPwDKebtoOUfEDD18IIFRecMAN_LgoNensPl6zxx_9YQOZyTIQXBaXf2puUuU6yZUwgV8Lqza7P65m4Fh7bUIsk4cDTG"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-12 w-full flex justify-between items-end">
+<div>
+<span class="font-data-mono text-label-caps text-secondary mb-2 block">MODULE_01</span>
+<h3 class="font-headline-md text-on-surface">Quantum Bridge</h3>
+<p class="font-body-md text-on-surface-variant max-w-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Cross-chain liquidity migration paths visualized through high-frequency neural impulses.</p>
+</div>
+<div class="w-12 h-12 rounded-full border border-secondary/30 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all duration-300">
+<span class="material-symbols-outlined">north_east</span>
+</div>
+</div>
+</div>
+<!-- Card 02: L2 Settlement (Portrait) -->
+<div class="col-span-12 md:col-span-4 row-span-3 group relative overflow-hidden rounded-xl bg-surface-container glass-card transition-all duration-700">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-50 group-hover:opacity-90 transition-all duration-700" data-alt="Abstract portrait-oriented digital art titled 'L2 Settlement'. Thousands of tiny, golden geometric prisms falling into a perfectly ordered grid within a dark, foggy chamber. The lighting is dramatic, highlighting the edges of the gold cubes. Hyper-realistic textures, macro photography style, deep mahogany and charcoal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgnsjsynDUvisNZZGMxfmAMijAv8qUdB5pjeUhcuPCCdt8VYFtz0P4RksgEHUI_YDU1_6hZHcOZMZC8cQ_QJ4P8WH9esITCcDtVkpXTRdAY92J_DmJ8GpfCF4kY4aMD-R9TcieGiLxHRFN5V8HLmQ7v56cpqGUb3MnIKVjvge9hdVXKBQD4APQ-CJQ5PbQI8RspWalDnvjMNwOsksTEyDruHTKL0RTX8lLygVypogW4H9VryXBuJDA6CGye_ftsNAj_gdROpeUYt8j"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/80"></div>
+<div class="absolute top-0 left-0 p-8">
+<div class="[writing-mode:vertical-rl] font-data-mono text-label-caps text-secondary/40 tracking-widest uppercase">Efficiency Layer</div>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<span class="font-data-mono text-label-caps text-secondary mb-2 block">MODULE_02</span>
+<h3 class="font-headline-md text-on-surface">L2 Settlement</h3>
+<div class="mt-6 flex flex-col gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+<span class="font-data-mono text-[10px] text-on-surface-variant">TPS CAPACITY</span>
+<span class="font-data-mono text-[10px] text-secondary">85,000+</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+<span class="font-data-mono text-[10px] text-on-surface-variant">FINALITY</span>
+<span class="font-data-mono text-[10px] text-secondary">0.4 SEC</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 03: Sovereign Node (Square) -->
+<div class="col-span-12 md:col-span-4 row-span-1 group relative overflow-hidden rounded-xl bg-surface-container glass-card transition-all duration-700">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-1000" data-alt="A close-up conceptual visualization of a 'Sovereign Node'. A pulsating core of liquid gold suspended inside a dark obsidian sphere. Delicate white glass fibers connect the sphere to the surrounding void. Minimalist, clean, luxury tech aesthetic, golden ratio composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwx9zwIsb3UXwikpQgEeiMIDZ7hNRGu4gWP0-Pn25nU8My0cpdM9M-wxl27QtmKBR2sgJWw7O_13FI976pgiDL36v37VCmg3EbnrmShQiN8Fp__n42emp4EVFWNk8dnw54-27MWh7OtrgT1ppPRwjn00hQZ9_vJIu3Af8ZN54LhKRPePh8rPL1J1pQO8ulMJJNCMCimTkWJ-b3-LFdRNcQMO7z-b6SHluqR048zatmimXkxLcoSh1gqZTQGbtolMqT1ZR-QxZSLLMd"/>
+</div>
+<div class="absolute inset-0 bg-surface-container/60 group-hover:bg-transparent transition-colors duration-500"></div>
+<div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
+<span class="font-data-mono text-label-caps text-secondary mb-1">MODULE_03</span>
+<h3 class="font-headline-sm text-on-surface">Sovereign Node</h3>
+</div>
+</div>
+<!-- Card 04: Data Visualization (Horizontal) -->
+<div class="col-span-12 md:col-span-4 row-span-1 group relative overflow-hidden rounded-xl bg-surface-container glass-card transition-all duration-700 flex items-center justify-center p-8">
+<div class="relative w-full h-full flex flex-col justify-center">
+<div class="flex items-end gap-2 h-24 mb-4">
+<div class="flex-1 bg-secondary/20 h-[40%] group-hover:h-[80%] transition-all duration-1000 delay-100"></div>
+<div class="flex-1 bg-secondary/40 h-[60%] group-hover:h-[40%] transition-all duration-1000 delay-200"></div>
+<div class="flex-1 bg-secondary/10 h-[30%] group-hover:h-[90%] transition-all duration-1000 delay-300"></div>
+<div class="flex-1 bg-secondary/60 h-[80%] group-hover:h-[50%] transition-all duration-1000 delay-400"></div>
+<div class="flex-1 bg-secondary/30 h-[50%] group-hover:h-[70%] transition-all duration-1000 delay-500"></div>
+</div>
+<div class="flex justify-between font-data-mono text-[10px] text-on-surface-variant">
+<span>NETWORK_LOAD</span>
+<span>OPTIMIZED</span>
+</div>
+</div>
+</div>
+<!-- Card 05: Narrative Card (Large/Wide) -->
+<div class="col-span-12 md:col-span-8 row-span-1 group relative overflow-hidden rounded-xl bg-surface-container glass-card transition-all duration-700 p-12 flex items-center">
+<div class="grid grid-cols-2 w-full gap-12">
+<div>
+<h3 class="font-headline-sm text-on-surface mb-4">Immutable Aesthetics</h3>
+<p class="font-body-md text-on-surface-variant">
+                                    Beyond pure utility, the Verum protocol treats every transaction as a piece of digital legacy. Our visual language mirrors this commitment to permanence.
+                                </p>
+</div>
+<div class="flex items-center justify-end gap-8">
+<div class="text-right">
+<div class="font-headline-md text-secondary leading-none">12.4k</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant uppercase mt-1">Nodes Active</div>
+</div>
+<div class="w-[1px] h-12 bg-outline-variant/30"></div>
+<div class="text-right">
+<div class="font-headline-md text-secondary leading-none">0.001%</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant uppercase mt-1">Drift Margin</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive CTA Section -->
+<section class="px-margin-desktop py-32 bg-surface-container-low relative overflow-hidden">
+<div class="max-w-4xl mx-auto text-center float-animation">
+<span class="font-data-mono text-label-caps text-secondary mb-8 block tracking-widest">JOIN THE VANGUARD</span>
+<h2 class="font-headline-lg text-on-surface mb-12">Experience the Protocol in Real-Time</h2>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="px-10 py-4 bg-secondary text-on-secondary font-label-caps rounded-full hover:shadow-[0_0_30px_rgba(233,195,73,0.3)] transition-all duration-300 transform hover:scale-105">
+                            VIEW THE EXPLORER
+                        </button>
+<button class="px-10 py-4 border border-secondary/30 text-secondary font-label-caps rounded-full hover:bg-secondary/5 transition-all duration-300 transform hover:scale-105">
+                            ACCESS THE ARCHIVE
+                        </button>
+</div>
+</div>
+<!-- Decorative elements -->
+<div class="absolute left-0 bottom-0 w-64 h-64 bg-secondary/5 blur-[100px] pointer-events-none"></div>
+<div class="absolute right-0 top-0 w-64 h-64 bg-primary/5 blur-[100px] pointer-events-none"></div>
+</section>
+</div>
+</main>
+<footer class="site-footer" id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="flex items-center gap-3">
+        <img alt="VERUM Logo" class="h-7 w-auto opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm" style="color:var(--on-surface)">VERUM</span>
+      </div>
+      <p class="footer-brand-desc">The nexus of digital sovereignty and opulent finance. Bridging the gap between traditional prestige and the decentralised frontier.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Newsletter</p>
+      <form class="footer-email-form" onsubmit="return false;">
+        <input placeholder="EXECUTIVE@VERUM.IO" type="email"/>
+        <button type="submit"><span class="material-symbols-outlined">arrow_forward</span></button>
+      </form>
+      <p style="font-size:10px;letter-spacing:0.06em;color:var(--on-surface-var);opacity:0.5;margin-top:0.75rem;">Institutional dispatches. No spam, ever.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Protocol</p>
+      <div class="footer-nav-links">
+        <a href="../home/index.html">Home</a>
+        <a href="../about/index.html">About</a>
+        <a href="../ecosystem/index.html">Ecosystem</a>
+        <a href="../gallery/index.html">Gallery</a>
+        <a href="../executive-team/index.html">Team</a>
+        <a href="../faq-reviews/index.html">FAQ</a>
+        <a href="../contact/index.html">Contact</a>
+      </div>
+      <div class="footer-social-icons" style="margin-top:1.5rem;">
+        <a href="#" aria-label="Network"><span class="material-symbols-outlined" style="font-size:20px;">hub</span></a>
+        <a href="#" aria-label="Token"><span class="material-symbols-outlined" style="font-size:20px;">token</span></a>
+        <a href="#" aria-label="Globe"><span class="material-symbols-outlined" style="font-size:20px;">public</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Verum Protocol. All rights reserved.</p>
+    <p>SECURE · IMMUTABLE · SOVEREIGN</p>
+  </div>
+</footer>
+<script src="../../js/modules/cursor.js"></script>
+<script src="../../js/modules/theme.js"></script>
+<script src="../../js/modules/mobile-nav.js"></script>
+<script src="../../js/init.js"></script>
+</body></html>

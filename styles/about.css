@@ -1,0 +1,15 @@
+/* ==========================================================================
+   VERUM — About Page Styles
+   ========================================================================== */
+
+/* Glass card hover — about variant */
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(233, 195, 73, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(233, 195, 73, 0.1);
+}
+
+/* Architecture table rows */
+.architecture-row {
+    transition: all 0.3s ease;
+}

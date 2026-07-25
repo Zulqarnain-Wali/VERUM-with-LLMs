@@ -1,0 +1,414 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../styles/shared.css"/>
+<link rel="stylesheet" href="../../styles/contact.css"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "error": "#ffb4ab",
+        "inverse-on-surface": "#2f3131",
+        "primary-fixed-dim": "#cbc5c3",
+        "tertiary-container": "#0e0b0a",
+        "outline": "#998f8a",
+        "primary-container": "#0d0b0a",
+        "inverse-primary": "#615d5c",
+        "on-primary": "#33302e",
+        "on-tertiary-fixed": "#1e1b1a",
+        "on-secondary": "#3c2f00",
+        "on-primary-fixed": "#1d1b1a",
+        "surface-container-highest": "var(--surface-highest)",
+        "inverse-surface": "#e3e2e2",
+        "secondary": "var(--gold)",
+        "on-background": "var(--on-surface)",
+        "surface-container-lowest": "#0d0e0f",
+        "surface-container": "var(--surface-container)",
+        "on-error-container": "#ffdad6",
+        "on-surface-variant": "var(--on-surface-var)",
+        "on-secondary-container": "#342800",
+        "outline-variant": "var(--outline-var)",
+        "on-secondary-fixed-variant": "#574500",
+        "on-primary-container": "#7e7977",
+        "error-container": "#93000a",
+        "primary": "#cbc5c3",
+        "secondary-fixed": "var(--gold-light)",
+        "on-tertiary-fixed-variant": "#4a4644",
+        "on-error": "#690005",
+        "on-tertiary": "#342f2e",
+        "primary-fixed": "#e8e1df",
+        "surface-dim": "var(--surface-low)",
+        "tertiary": "#ccc5c3",
+        "tertiary-fixed-dim": "#ccc5c3",
+        "surface-container-low": "var(--surface-container-low)",
+        "on-secondary-fixed": "#241a00",
+        "secondary-fixed-dim": "var(--gold)",
+        "surface": "var(--surface)",
+        "secondary-container": "#af8d11",
+        "on-primary-fixed-variant": "#494645",
+        "on-surface": "var(--on-surface)",
+        "tertiary-fixed": "#e9e1de",
+        "surface-variant": "var(--surface-container)",
+        "surface-container-high": "var(--surface-container-high)",
+        "on-tertiary-container": "#7f7977",
+        "surface-tint": "#cbc5c3",
+        "surface-bright": "var(--surface-high)",
+        "background": "var(--bg)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "unit": "8px",
+        "margin-desktop": "80px",
+        "gutter": "24px",
+        "margin-mobile": "20px"
+      },
+      "fontFamily": {
+        "data-mono": ["Inter"],
+        "body-lg": ["Inter"],
+        "label-caps": ["Inter"],
+        "headline-md": ["Playfair Display"],
+        "headline-lg": ["Playfair Display"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Playfair Display"],
+        "headline-lg-mobile": ["Playfair Display"]
+      },
+      "fontSize": {
+        "data-mono": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-background font-body-md text-on-surface overflow-x-hidden">
+
+<!-- Custom Cursor Elements --><div class="cursor-dot" id="cursor-dot"></div><div class="cursor-ring" id="cursor-ring"></div>
+
+<header class="fixed top-0 w-full z-50 nav-container" id="main-header">
+  <div class="tilt-nav mx-auto mt-3 max-w-[1440px] px-4 sm:px-6 lg:px-16">
+    <div class="nav-pill h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a class="flex items-center gap-3 shrink-0" href="../home/index.html">
+        <img alt="VERUM Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm text-secondary tracking-widest uppercase hidden sm:block">VERUM</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7" id="desktop-nav">
+        <a class="nav-link" href="../home/index.html">Home</a>
+        <a class="nav-link" href="../about/index.html">About</a>
+        <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+        <a class="nav-link" href="../gallery/index.html">Gallery</a>
+        <a class="nav-link" href="../executive-team/index.html">Team</a>
+        <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+        <a class="nav-link active" href="../contact/index.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button aria-label="Toggle theme" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-on-surface-variant hover:text-secondary hover:border-secondary transition-all" id="theme-toggle" onclick="toggleTheme()">
+          <span class="material-symbols-outlined text-[20px]" id="theme-icon">contrast</span>
+        </button>
+        <button class="hidden sm:flex items-center px-5 py-2 border border-secondary text-secondary font-label-caps text-[11px] tracking-widest hover:bg-secondary hover:text-on-secondary hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] transition-all rounded-full">CONNECT WALLET</button>
+        <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:bg-secondary transition-colors shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <button aria-label="Open menu" class="hamburger-btn lg:hidden" id="hamburger" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-drawer" id="mobile-nav">
+  <button class="absolute top-6 right-6 text-on-surface-variant hover:text-secondary" onclick="toggleMobileNav()">
+    <span class="material-symbols-outlined text-3xl">close</span>
+  </button>
+  <a class="nav-link" href="../home/index.html">Home</a>
+  <a class="nav-link" href="../about/index.html">About</a>
+  <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+  <a class="nav-link" href="../gallery/index.html">Gallery</a>
+  <a class="nav-link" href="../executive-team/index.html">Team</a>
+  <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+  <a class="nav-link active" href="../contact/index.html">Contact</a>
+  <button class="mt-4 px-8 py-3 border border-secondary text-secondary font-label-caps text-sm tracking-widest hover:bg-secondary hover:text-on-secondary transition-all rounded-full">CONNECT WALLET</button>
+</div>
+<main class="pt-24 min-h-screen">
+<div class="flex flex-col w-full">
+<!-- Hero Section / Title Alignment -->
+<section class="relative px-margin-desktop py-24 overflow-hidden">
+<div class="max-w-container-max mx-auto grid grid-cols-12 gap-gutter items-end">
+<div class="col-span-12 lg:col-span-8 animate-float">
+<span class="font-data-mono text-secondary mb-4 block uppercase tracking-[0.3em]">Institutional Relations</span>
+<h1 class="font-headline-lg text-on-surface text-6xl lg:text-8xl leading-none">
+                            Establish <br/>
+<span class="text-outline">Sovereignty.</span>
+</h1>
+</div>
+<div class="col-span-12 lg:col-span-4 pb-4">
+<p class="font-body-lg text-on-surface-variant max-w-sm">
+                            Connect with our global concierge for bespoke liquidity solutions and private protocol access.
+                        </p>
+</div>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+</section>
+<!-- Main Contact Grid -->
+<section class="px-margin-desktop pb-32">
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Left Side: The Map & Global Nodes -->
+<div class="lg:col-span-7 space-y-12">
+<div class="relative group animate-float" style="animation-delay: 1s;">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none"></div>
+<div class="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:shadow-[0_0_30px_rgba(233,195,73,0.1)]" data-alt="A stylized, dark luxury world map with a mahogany and charcoal color palette. Tiny glowing gold nodes pulsate in London, Dubai, and Singapore. The map features subtle topographical textures and a golden grid overlay representing a global decentralized network. Cinematic lighting, high contrast, 8k resolution." data-location="London, Dubai, Singapore" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXeR3hIZiQHGOSmoYaNGnc3aY8hwbcFjibdD_NymncfhP0sTEYlg4ZKmCMGvLZEq4FLIRKoafCmXldERPqKlkAmDzgRvkac7kGR51BlULjYToO0gL226Pvdspbs_ugvVpQO5njO6jlJYzZ89gNPnvJwoC8lXIYs2vDRK-e24uyweU2USJ3DAUgxibSZg7y9ktxHrX7l9XYUjeGGGMisWzYOGTfU7mDqHqpQozNH-8R-Vsi7A7ySpDeGH3W4x8Xc8r4HgogEkJ1kCwT'); background-size: cover; background-position: center;">
+</div>
+<!-- Map Overlays (Nodes) -->
+<div class="absolute top-1/4 left-1/3 z-20 flex flex-col items-center group/node">
+<div class="w-3 h-3 bg-secondary rounded-full shadow-[0_0_15px_rgba(233,195,73,0.8)] animate-pulse"></div>
+<span class="mt-2 font-data-mono text-[10px] text-secondary opacity-0 group-hover/node:opacity-100 transition-opacity uppercase tracking-widest">Node_LDN</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="space-y-4">
+<span class="font-label-caps text-secondary">LONDON HQ</span>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                                    1 Berkeley Street,<br/>
+                                    Mayfair, London<br/>
+                                    W1J 8DJ, UK
+                                </p>
+</div>
+<div class="space-y-4">
+<span class="font-label-caps text-secondary">DUBAI HUB</span>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                                    Level 15, ICD Brookfield Place,<br/>
+                                    DIFC, Dubai<br/>
+                                    UAE
+                                </p>
+</div>
+<div class="space-y-4">
+<span class="font-label-caps text-secondary">SINGAPORE</span>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                                    Marina Bay Financial Centre,<br/>
+                                    Tower 3, 12 Marina Blvd,<br/>
+                                    Singapore 018982
+                                </p>
+</div>
+</div>
+</div>
+<!-- Right Side: Luxury Contact Form -->
+<div class="lg:col-span-5">
+<div class="glass-card p-12 rounded-xl shadow-xl relative overflow-hidden">
+<!-- Glass highlight -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 blur-3xl rounded-full"></div>
+<form class="space-y-10 relative z-10" id="verum-contact">
+<div class="group relative">
+<input class="w-full bg-transparent border-b border-outline-variant py-4 text-on-surface font-body-lg focus:outline-none peer placeholder-transparent" id="name" name="name" required="" type="text"/>
+<label class="absolute left-0 top-4 font-label-caps text-on-surface-variant transition-all peer-placeholder-shown:text-body-lg peer-placeholder-shown:text-on-surface-variant peer-focus:-top-4 peer-focus:text-secondary peer-focus:text-[10px]" for="name">
+                                        FULL NAME
+                                    </label>
+<div class="absolute bottom-0 left-0 h-[1px] w-0 bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+</div>
+<div class="group relative">
+<input class="w-full bg-transparent border-b border-outline-variant py-4 text-on-surface font-body-lg focus:outline-none peer placeholder-transparent" id="institution" name="institution" required="" type="text"/>
+<label class="absolute left-0 top-4 font-label-caps text-on-surface-variant transition-all peer-placeholder-shown:text-body-lg peer-placeholder-shown:text-on-surface-variant peer-focus:-top-4 peer-focus:text-secondary peer-focus:text-[10px]" for="institution">
+                                        INSTITUTION / FAMILY OFFICE
+                                    </label>
+<div class="absolute bottom-0 left-0 h-[1px] w-0 bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+</div>
+<div class="group relative">
+<textarea class="w-full bg-transparent border-b border-outline-variant py-4 text-on-surface font-body-lg focus:outline-none peer placeholder-transparent resize-none" id="message" name="message" required="" rows="4"></textarea>
+<label class="absolute left-0 top-4 font-label-caps text-on-surface-variant transition-all peer-placeholder-shown:text-body-lg peer-placeholder-shown:text-on-surface-variant peer-focus:-top-4 peer-focus:text-secondary peer-focus:text-[10px]" for="message">
+                                        INQUIRY DETAILS
+                                    </label>
+<div class="absolute bottom-0 left-0 h-[1px] w-0 bg-secondary transition-all duration-500 group-focus-within:w-full"></div>
+</div>
+<div class="pt-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(233,195,73,0.5)]"></div>
+<span class="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-tighter">Secure Encrypted Channel</span>
+</div>
+<button class="group flex items-center gap-4 bg-secondary text-on-secondary px-8 py-4 rounded-full font-label-caps hover:scale-105 transition-all shadow-lg active:scale-95" type="submit">
+                                        TRANSMIT
+                                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Bottom detail -->
+<div class="mt-12 flex justify-end gap-12 text-on-surface-variant/40">
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-[10px] uppercase">Response Time</span>
+<span class="font-headline-sm text-on-surface">~4H</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-[10px] uppercase">Service Availability</span>
+<span class="font-headline-sm text-on-surface">24/7</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Accents Section -->
+<section class="w-full bg-surface-container/50 h-[400px] relative overflow-hidden flex items-center justify-center">
+<div class="relative z-10 text-center space-y-8 px-margin-mobile">
+<h2 class="font-headline-md text-secondary">The Verum Distinction</h2>
+<div class="flex flex-wrap justify-center gap-8 lg:gap-24">
+<div class="flex flex-col items-center space-y-2 glass-card p-6 rounded-xl min-w-[160px]">
+<span class="material-symbols-outlined text-4xl text-on-surface">verified_user</span>
+<span class="font-label-caps">Absolute Privacy</span>
+</div>
+<div class="flex flex-col items-center space-y-2 glass-card p-6 rounded-xl min-w-[160px]">
+<span class="material-symbols-outlined text-4xl text-on-surface">token</span>
+<span class="font-label-caps">On-Chain Custody</span>
+</div>
+<div class="flex flex-col items-center space-y-2 glass-card p-6 rounded-xl min-w-[160px]">
+<span class="material-symbols-outlined text-4xl text-on-surface">account_balance</span>
+<span class="font-label-caps">Multi-Jurisdictional</span>
+</div>
+</div>
+</div>
+</section>
+<script>
+                // Shader logic implementation
+                class WebGLShader extends HTMLElement {
+                    constructor() {
+                        super();
+                        this.canvas = document.createElement('canvas');
+                        this.gl = this.canvas.getContext('webgl');
+                        this.time = 0;
+                        this.mouse = { x: 0, y: 0 };
+                    }
+
+                    connectedCallback() {
+                        this.appendChild(this.canvas);
+                        const script = this.querySelector('script[type="x-shader/x-fragment"]');
+                        if (!script) return;
+                        this.initShader(script.textContent);
+                        this.handleResize();
+                        window.addEventListener('resize', () => this.handleResize());
+                        window.addEventListener('mousemove', (e) => {
+                            this.mouse.x = e.clientX;
+                            this.mouse.y = window.innerHeight - e.clientY;
+                        });
+                        this.render();
+                    }
+
+                    handleResize() {
+                        this.canvas.width = window.innerWidth;
+                        this.canvas.height = window.innerHeight;
+                        this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+                    }
+
+                    initShader(fragmentSource) {
+                        const gl = this.gl;
+                        const vertexSource = `
+                            attribute vec2 position;
+                            varying vec2 v_texCoord;
+                            void main() {
+                                v_texCoord = position * 0.5 + 0.5;
+                                gl_Position = vec4(position, 0.0, 1.0);
+                            }
+                        `;
+                        
+                        const createShader = (type, source) => {
+                            const shader = gl.createShader(type);
+                            gl.shaderSource(shader, source);
+                            gl.compileShader(shader);
+                            return shader;
+                        };
+
+                        const program = gl.createProgram();
+                        gl.attachShader(program, createShader(gl.VERTEX_SHADER, vertexSource));
+                        gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fragmentSource));
+                        gl.linkProgram(program);
+                        gl.useProgram(program);
+
+                        this.program = program;
+                        this.positionLocation = gl.getAttribLocation(program, 'position');
+                        this.timeLocation = gl.getUniformLocation(program, 'u_time');
+                        this.resLocation = gl.getUniformLocation(program, 'u_resolution');
+                        this.mouseLocation = gl.getUniformLocation(program, 'u_mouse');
+
+                        const buffer = gl.createBuffer();
+                        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+                        gl.enableVertexAttribArray(this.positionLocation);
+                        gl.vertexAttribPointer(this.positionLocation, 2, gl.FLOAT, false, 0, 0);
+                    }
+
+                    render() {
+                        const gl = this.gl;
+                        this.time += 0.016;
+                        gl.uniform1f(this.timeLocation, this.time);
+                        gl.uniform2f(this.resLocation, this.canvas.width, this.canvas.height);
+                        gl.uniform2f(this.mouseLocation, this.mouse.x, this.mouse.y);
+                        gl.drawArrays(gl.TRIANGLES, 0, 6);
+                        requestAnimationFrame(() => this.render());
+                    }
+                }
+                customElements.define('webgl-shader', WebGLShader);
+            </script>
+</div>
+</main>
+<footer class="site-footer" id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="flex items-center gap-3">
+        <img alt="VERUM Logo" class="h-7 w-auto opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm" style="color:var(--on-surface)">VERUM</span>
+      </div>
+      <p class="footer-brand-desc">The nexus of digital sovereignty and opulent finance. Bridging the gap between traditional prestige and the decentralised frontier.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Newsletter</p>
+      <form class="footer-email-form" onsubmit="return false;">
+        <input placeholder="EXECUTIVE@VERUM.IO" type="email"/>
+        <button type="submit"><span class="material-symbols-outlined">arrow_forward</span></button>
+      </form>
+      <p style="font-size:10px;letter-spacing:0.06em;color:var(--on-surface-var);opacity:0.5;margin-top:0.75rem;">Institutional dispatches. No spam, ever.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Protocol</p>
+      <div class="footer-nav-links">
+        <a href="../home/index.html">Home</a>
+        <a href="../about/index.html">About</a>
+        <a href="../ecosystem/index.html">Ecosystem</a>
+        <a href="../gallery/index.html">Gallery</a>
+        <a href="../executive-team/index.html">Team</a>
+        <a href="../faq-reviews/index.html">FAQ</a>
+        <a href="../contact/index.html">Contact</a>
+      </div>
+      <div class="footer-social-icons" style="margin-top:1.5rem;">
+        <a href="#" aria-label="Network"><span class="material-symbols-outlined" style="font-size:20px;">hub</span></a>
+        <a href="#" aria-label="Token"><span class="material-symbols-outlined" style="font-size:20px;">token</span></a>
+        <a href="#" aria-label="Globe"><span class="material-symbols-outlined" style="font-size:20px;">public</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Verum Protocol. All rights reserved.</p>
+    <p>SECURE · IMMUTABLE · SOVEREIGN</p>
+  </div>
+</footer>
+<script src="../../js/modules/cursor.js"></script>
+<script src="../../js/modules/theme.js"></script>
+<script src="../../js/modules/mobile-nav.js"></script>
+<script src="../../js/modules/contact-form.js"></script>
+<script src="../../js/init.js"></script>
+</body></html>

@@ -1,0 +1,8 @@
+/* ==========================================================================
+   VERUM — Executive Team Page Styles
+   ========================================================================== */
+
+/* Custom cursor — extended transition for executive-team */
+.custom-cursor {
+    transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s ease-out;
+}

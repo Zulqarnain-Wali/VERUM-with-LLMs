@@ -1,0 +1,399 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../../styles/shared.css"/>
+<link rel="stylesheet" href="../../styles/about.css"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "error": "#ffb4ab",
+        "inverse-on-surface": "#2f3131",
+        "primary-fixed-dim": "#cbc5c3",
+        "tertiary-container": "#0e0b0a",
+        "outline": "#998f8a",
+        "primary-container": "#0d0b0a",
+        "inverse-primary": "#615d5c",
+        "on-primary": "#33302e",
+        "on-tertiary-fixed": "#1e1b1a",
+        "on-secondary": "#3c2f00",
+        "on-primary-fixed": "#1d1b1a",
+        "surface-container-highest": "var(--surface-highest)",
+        "inverse-surface": "#e3e2e2",
+        "secondary": "var(--gold)",
+        "on-background": "var(--on-surface)",
+        "surface-container-lowest": "#0d0e0f",
+        "surface-container": "var(--surface-container)",
+        "on-error-container": "#ffdad6",
+        "on-surface-variant": "var(--on-surface-var)",
+        "on-secondary-container": "#342800",
+        "outline-variant": "var(--outline-var)",
+        "on-secondary-fixed-variant": "#574500",
+        "on-primary-container": "#7e7977",
+        "error-container": "#93000a",
+        "primary": "#cbc5c3",
+        "secondary-fixed": "var(--gold-light)",
+        "on-tertiary-fixed-variant": "#4a4644",
+        "on-error": "#690005",
+        "on-tertiary": "#342f2e",
+        "primary-fixed": "#e8e1df",
+        "surface-dim": "var(--surface-low)",
+        "tertiary": "#ccc5c3",
+        "tertiary-fixed-dim": "#ccc5c3",
+        "surface-container-low": "var(--surface-container-low)",
+        "on-secondary-fixed": "#241a00",
+        "secondary-fixed-dim": "var(--gold)",
+        "surface": "var(--surface)",
+        "secondary-container": "#af8d11",
+        "on-primary-fixed-variant": "#494645",
+        "on-surface": "var(--on-surface)",
+        "tertiary-fixed": "#e9e1de",
+        "surface-variant": "var(--surface-container)",
+        "surface-container-high": "var(--surface-container-high)",
+        "on-tertiary-container": "#7f7977",
+        "surface-tint": "#cbc5c3",
+        "surface-bright": "var(--surface-high)",
+        "background": "var(--bg)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "unit": "8px",
+        "margin-desktop": "80px",
+        "gutter": "24px",
+        "margin-mobile": "20px"
+      },
+      "fontFamily": {
+        "data-mono": ["Inter"],
+        "body-lg": ["Inter"],
+        "label-caps": ["Inter"],
+        "headline-md": ["Playfair Display"],
+        "headline-lg": ["Playfair Display"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Playfair Display"],
+        "headline-lg-mobile": ["Playfair Display"]
+      },
+      "fontSize": {
+        "data-mono": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-background font-body-md text-on-surface overflow-x-hidden">
+<!-- Interactive Background Shader -->
+
+<!-- Custom Cursor Elements --><div class="cursor-dot" id="cursor-dot"></div><div class="cursor-ring" id="cursor-ring"></div>
+
+<header class="fixed top-0 w-full z-50 nav-container" id="main-header">
+  <div class="tilt-nav mx-auto mt-3 max-w-[1440px] px-4 sm:px-6 lg:px-16">
+    <div class="nav-pill h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a class="flex items-center gap-3 shrink-0" href="../home/index.html">
+        <img alt="VERUM Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm text-secondary tracking-widest uppercase hidden sm:block">VERUM</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7" id="desktop-nav">
+        <a class="nav-link" href="../home/index.html">Home</a>
+        <a class="nav-link active" href="../about/index.html" aria-current="page">About</a>
+        <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+        <a class="nav-link" href="../gallery/index.html">Gallery</a>
+        <a class="nav-link" href="../executive-team/index.html">Team</a>
+        <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+        <a class="nav-link" href="../contact/index.html">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button aria-label="Toggle theme" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-on-surface-variant hover:text-secondary hover:border-secondary transition-all" id="theme-toggle" onclick="toggleTheme()">
+          <span class="material-symbols-outlined text-[20px]" id="theme-icon">contrast</span>
+        </button>
+        <button class="hidden sm:flex items-center px-5 py-2 border border-secondary text-secondary font-label-caps text-[11px] tracking-widest hover:bg-secondary hover:text-on-secondary hover:shadow-[0_0_20px_rgba(233,195,73,0.4)] transition-all rounded-full">CONNECT WALLET</button>
+        <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:bg-secondary transition-colors shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <button aria-label="Open menu" class="hamburger-btn lg:hidden" id="hamburger" onclick="toggleMobileNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-drawer" id="mobile-nav">
+  <button class="absolute top-6 right-6 text-on-surface-variant hover:text-secondary" onclick="toggleMobileNav()">
+    <span class="material-symbols-outlined text-3xl">close</span>
+  </button>
+  <a class="nav-link" href="../home/index.html">Home</a>
+  <a class="nav-link active" href="../about/index.html">About</a>
+  <a class="nav-link" href="../ecosystem/index.html">Ecosystem</a>
+  <a class="nav-link" href="../gallery/index.html">Gallery</a>
+  <a class="nav-link" href="../executive-team/index.html">Team</a>
+  <a class="nav-link" href="../faq-reviews/index.html">FAQ</a>
+  <a class="nav-link" href="../contact/index.html">Contact</a>
+  <button class="mt-4 px-8 py-3 border border-secondary text-secondary font-label-caps text-sm tracking-widest hover:bg-secondary hover:text-on-secondary transition-all rounded-full">CONNECT WALLET</button>
+</div>
+<main class="pt-24 min-h-screen">
+<div class="flex flex-col w-full">
+<!-- Hero Narrative Section -->
+<section class="relative px-margin-desktop py-32 overflow-hidden">
+<div class="relative z-10 max-w-[1440px] mx-auto flex flex-col items-center text-center">
+<span class="font-data-mono text-label-caps text-secondary mb-6 tracking-[0.4em] uppercase opacity-80">The Sovereign Foundation</span>
+<h1 class="font-headline-lg text-on-surface max-w-4xl leading-tight mb-12">
+                        Engineering the <span class="italic text-secondary">Verum Standard</span>: A New Epoch of Digital Riches.
+                    </h1>
+<div class="w-px h-24 bg-gradient-to-b from-secondary to-transparent opacity-50 animate-float"></div>
+</div>
+</section>
+<!-- Mission Statement - High Contrast -->
+<section class="bg-surface-container-low/50 py-40 px-margin-desktop glass-card border-none rounded-none backdrop-blur-md">
+<div class="max-w-[1440px] mx-auto grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 lg:col-span-8 lg:col-start-3">
+<h2 class="font-headline-lg text-on-surface mb-8 leading-tight">
+                            Our mission is to decouple <span class="text-secondary">opulence</span> from centralized oversight, returning the power of absolute <span class="text-secondary">sovereignty</span> to the individual.
+                        </h2>
+<p class="font-body-lg text-on-surface-variant max-w-2xl border-l-2 border-secondary/30 pl-8 ml-2">
+                            Verum isn't just a protocol; it's a digital fortress. We bridge the gap between the tactile weight of traditional luxury and the ethereal velocity of decentralized finance.
+                        </p>
+</div>
+</div>
+</section>
+<!-- The Three Pillars - Alternating Grid -->
+<!-- Pillar 1: Scalability -->
+<section class="py-24 px-margin-desktop">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 space-y-8">
+<div class="flex items-center gap-4">
+<span class="font-data-mono text-secondary text-headline-sm">01</span>
+<div class="h-px w-12 bg-secondary/40"></div>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-widest">Performance</span>
+</div>
+<h3 class="font-headline-md text-on-surface text-5xl">Infinite Scalability</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            The Verum infrastructure utilizes a proprietary sharding mechanism that ensures transaction finality in sub-second intervals. As the ecosystem grows, the protocol’s throughput expands exponentially, mirroring the growth of your digital legacy.
+                        </p>
+<ul class="space-y-4 font-data-mono text-secondary text-sm">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                100k+ Transactions Per Second
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Asynchronous Consensus Mechanism
+                            </li>
+</ul>
+</div>
+<div class="order-1 md:order-2 relative aspect-square group animate-float" style="animation-delay: -1s;">
+<div class="absolute inset-0 bg-secondary/5 rounded-full scale-90 blur-3xl group-hover:scale-100 transition-transform duration-1000"></div>
+<img class="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-700 glass-card" data-alt="A high-tech 3D architectural visualization of a golden circuit board structured like a royal palace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUVojiNIftSkfWOHjfsbf2Bc1d_5g84uRvPV5mgtW2ROFKY-KRb0wHvXvUpEM8zwoLPKcsX4Ry6_ZS0g55O58RmxU1SJhDSXD5l9QnRveqyOFuxHpx2h2J2i0l84B6Aflbn-PSER7z2EV43rXdaIXPdFZDuTndUxhfbBm1jRWixPVkR8HnWeIJeHmKb2W09LJitI2jjTgzpuUyLqlK0y5Nsm9_IkcJIiAdvRZhzwErXmeuyxFg0cU5N9qavxDV9vwgivxtz8-gX7yx"/>
+</div>
+</div>
+</section>
+<!-- Pillar 2: Security -->
+<section class="py-24 px-margin-desktop bg-surface-container/30 backdrop-blur-sm">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="relative aspect-video lg:aspect-square animate-float" style="animation-delay: -2s;">
+<img class="w-full h-full object-cover rounded-2xl border border-white/5 glass-card" data-alt="An abstract visualization of a geometric digital vault." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYIqn395-HO7ooKa6vop4HRnTJD0kGUa8Gvg2qt0pu_OWLg7XMavLJKu1ViV5eMrzwkiWZ-_h9-Ff71dpOsV9ZUtEFjx0wJMg_X-lFCqogdSfSA-6vrwW0MLy0r3rLrZGPrOFpR-Jad55lMt-s8bjNIyJQ44scz89pRSqXasjBdKRxMdredq7uf72I1-vpBrHw3TUjAXA_ZQIjMvLn9xkpKCKkDxKiHfo0wu3ppeRLv7YJPDryZzItIqn22d7spMOBhGpgcMET4mk"/>
+<div class="absolute -bottom-8 -right-8 p-8 glass-card rounded-xl hidden lg:block">
+<div class="flex flex-col gap-2">
+<span class="font-data-mono text-secondary text-3xl">99.9%</span>
+<span class="font-label-caps text-on-surface-variant">Liveness Guarantee</span>
+</div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="flex items-center gap-4">
+<span class="font-data-mono text-secondary text-headline-sm">02</span>
+<div class="h-px w-12 bg-secondary/40"></div>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-widest">Integrity</span>
+</div>
+<h3 class="font-headline-md text-on-surface text-5xl">Obsessive Security</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            Security is not a feature; it is our ethos. Through Zero-Knowledge Proofs and Formal Verification of all smart contracts, Verum provides a sanctuary for capital that is immune to the volatilities of the wider market.
+                        </p>
+<div class="grid grid-cols-2 gap-6 pt-4">
+<div class="p-4 glass-card rounded-lg bg-surface-container-highest/30">
+<span class="material-symbols-outlined text-secondary mb-2">verified_user</span>
+<h4 class="font-headline-sm text-lg text-on-surface">ZK-Shield</h4>
+<p class="text-xs text-on-surface-variant mt-1">Private transactions by default.</p>
+</div>
+<div class="p-4 glass-card rounded-lg bg-surface-container-highest/30">
+<span class="material-symbols-outlined text-secondary mb-2">security</span>
+<h4 class="font-headline-sm text-lg text-on-surface">Formal Proof</h4>
+<p class="text-xs text-on-surface-variant mt-1">Mathematical certainty in code.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pillar 3: Sovereignty -->
+<section class="py-24 px-margin-desktop">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 space-y-8">
+<div class="flex items-center gap-4">
+<span class="font-data-mono text-secondary text-headline-sm">03</span>
+<div class="h-px w-12 bg-secondary/40"></div>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-widest">Independence</span>
+</div>
+<h3 class="font-headline-md text-on-surface text-5xl">Absolute Sovereignty</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            Your assets are truly yours. No intermediaries, no approvals, no borders. Verum returns the "private" to private banking, leveraging decentralized governance to ensure the protocol evolves in alignment with its most elite participants.
+                        </p>
+<button class="flex items-center gap-4 group px-6 py-2 rounded-full hover:bg-secondary/5 transition-all">
+<span class="font-label-caps text-secondary tracking-widest group-hover:mr-4 transition-all uppercase">Enter the Vault</span>
+<span class="material-symbols-outlined text-secondary transition-transform group-hover:rotate-45">arrow_outward</span>
+</button>
+</div>
+<div class="order-1 md:order-2 animate-float" style="animation-delay: -3s;">
+<div class="relative w-full h-[500px] overflow-hidden rounded-2xl glass-card border-none">
+<img class="w-full h-full object-cover" data-alt="A portrait of a digital bust made of translucent crystal and gold wires." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEJfEIzFcCoPHC_-LOOnLkBCFrIjuTFYgbcEDsWq_YOvlOTi16H0b3dpDNsLZkv1w2PS0KWC6w_rsJleLG4h7TYOFW1labb5jVJ_MGG8XNjZL-G_CINXijuM1VKk2flwR9XwcYgpAGDPFks5p7K5tI6lmS1Yhuns0kxRzFvmGcA-4QQJtLy7KbGuMXIVy7kbVXd8qQGYX2SwO0IPGB3GjNaENcdVZHrZ_U_fwiTPEvBqeOlUO5t_D7lNo0DuupNdFGjH5hA7b9AdRl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Architecture Graph -->
+<section class="py-32 px-margin-desktop">
+<div class="max-w-[1440px] mx-auto">
+<div class="mb-20">
+<h2 class="font-headline-md text-on-surface mb-4">Architecture Layering</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl">A hierarchical view of the Verum technology stack, designed for longevity and resilience.</p>
+</div>
+<div class="space-y-4">
+<!-- Layer 4 -->
+<div class="architecture-row group relative overflow-hidden p-8 glass-card rounded-xl hover:bg-secondary/10 transition-colors cursor-pointer" data-layer="4">
+<div class="flex justify-between items-center relative z-10">
+<div class="flex items-center gap-8">
+<span class="font-data-mono text-secondary/40 text-2xl">L4</span>
+<h4 class="font-headline-sm text-on-surface">Application Interface</h4>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-all">expand_more</span>
+</div>
+<div class="architecture-content hidden mt-6 text-on-surface-variant max-w-2xl font-body-md">
+                                The consumer-facing portal designed for mobile and desktop, offering seamless interaction with complex smart contract logic through an intuitive, luxury-grade UI.
+                            </div>
+</div>
+<!-- Layer 3 -->
+<div class="architecture-row group relative overflow-hidden p-8 glass-card rounded-xl hover:bg-secondary/10 transition-colors cursor-pointer" data-layer="3">
+<div class="flex justify-between items-center relative z-10">
+<div class="flex items-center gap-8">
+<span class="font-data-mono text-secondary/40 text-2xl">L3</span>
+<h4 class="font-headline-sm text-on-surface">Liquidity Aggregation</h4>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-all">expand_more</span>
+</div>
+<div class="architecture-content hidden mt-6 text-on-surface-variant max-w-2xl font-body-md">
+                                A proprietary routing engine that sources the deepest liquidity across fragmented chains, ensuring zero-slippage executions for high-value positions.
+                            </div>
+</div>
+<!-- Layer 2 -->
+<div class="architecture-row group relative overflow-hidden p-8 glass-card rounded-xl hover:bg-secondary/10 transition-colors cursor-pointer" data-layer="2">
+<div class="flex justify-between items-center relative z-10">
+<div class="flex items-center gap-8">
+<span class="font-data-mono text-secondary/40 text-2xl">L2</span>
+<h4 class="font-headline-sm text-on-surface">Privacy &amp; Execution</h4>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-all">expand_more</span>
+</div>
+<div class="architecture-content hidden mt-6 text-on-surface-variant max-w-2xl font-body-md">
+                                Optimized execution environment utilizing zk-rollups to maintain anonymity while reducing gas overhead to near-zero.
+                            </div>
+</div>
+<!-- Layer 1 -->
+<div class="architecture-row group relative overflow-hidden p-8 glass-card rounded-xl hover:bg-secondary/10 transition-colors cursor-pointer border-l-2 border-secondary/50" data-layer="1">
+<div class="flex justify-between items-center relative z-10">
+<div class="flex items-center gap-8">
+<span class="font-data-mono text-secondary text-2xl">L1</span>
+<h4 class="font-headline-sm text-on-surface">Verum Consensus</h4>
+</div>
+<span class="material-symbols-outlined text-secondary">shield</span>
+</div>
+<div class="architecture-content hidden mt-6 text-on-surface-variant max-w-2xl font-body-md">
+                                The bedrock. A custom Proof-of-Stake-Authority (PoSA) ledger designed for institutional-grade reliability and extreme throughput.
+                            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Call to Action -->
+<section class="relative py-48 px-margin-desktop overflow-hidden flex flex-col items-center justify-center">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<svg class="w-full h-full opacity-10" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<pattern height="10" id="grid" patternunits="userSpaceOnUse" width="10">
+<path class="text-secondary" d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100" width="100"></rect>
+</svg>
+</div>
+<h2 class="font-headline-lg text-center text-on-surface max-w-3xl mb-12">Are you ready to transcend the legacy financial system?</h2>
+<div class="flex flex-wrap justify-center gap-6">
+<button class="px-12 py-4 bg-secondary text-on-secondary font-label-caps rounded-full hover:shadow-[0_0_30px_rgba(233,195,73,0.3)] transition-all uppercase tracking-widest active:scale-95">Request Invitation</button>
+<button class="px-12 py-4 border border-secondary text-secondary font-label-caps rounded-full hover:bg-secondary/10 transition-all uppercase tracking-widest active:scale-95">Whitepaper</button>
+</div>
+</section>
+</div>
+</main>
+<footer class="site-footer" id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="flex items-center gap-3">
+        <img alt="VERUM Logo" class="h-7 w-auto opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZFj0-D4pVmQoxMR5jAfhWCL-wF7TwaeHhckPcJtpUTHZNXflQJq3piArUDyJOlBKHZwCJn1-aQ5ujDpK1oe6UJEeRiIUQascrMyQM9U3Uccow6FKRnjV2tQUZSqqtJ76B7Mpv7eqlZAioz2mkWBwC2rwUuZv_fPrAGSpmHe4QYXXdTJEhvEpoRoonfARIr75vC0gZrHxapmEWczkaFPr1rwxpoRWF9waPhIqe_4lk_gt4yiZ6TYLz8Eow9asKgHTR2oYKJ59s_6h"/>
+        <span class="font-headline-sm" style="color:var(--on-surface)">VERUM</span>
+      </div>
+      <p class="footer-brand-desc">The nexus of digital sovereignty and opulent finance. Bridging the gap between traditional prestige and the decentralised frontier.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Newsletter</p>
+      <form class="footer-email-form" onsubmit="return false;">
+        <input placeholder="EXECUTIVE@VERUM.IO" type="email"/>
+        <button type="submit"><span class="material-symbols-outlined">arrow_forward</span></button>
+      </form>
+      <p style="font-size:10px;letter-spacing:0.06em;color:var(--on-surface-var);opacity:0.5;margin-top:0.75rem;">Institutional dispatches. No spam, ever.</p>
+    </div>
+    <div>
+      <p class="footer-heading">Protocol</p>
+      <div class="footer-nav-links">
+        <a href="../home/index.html">Home</a>
+        <a href="../about/index.html">About</a>
+        <a href="../ecosystem/index.html">Ecosystem</a>
+        <a href="../gallery/index.html">Gallery</a>
+        <a href="../executive-team/index.html">Team</a>
+        <a href="../faq-reviews/index.html">FAQ</a>
+        <a href="../contact/index.html">Contact</a>
+      </div>
+      <div class="footer-social-icons" style="margin-top:1.5rem;">
+        <a href="#" aria-label="Network"><span class="material-symbols-outlined" style="font-size:20px;">hub</span></a>
+        <a href="#" aria-label="Token"><span class="material-symbols-outlined" style="font-size:20px;">token</span></a>
+        <a href="#" aria-label="Globe"><span class="material-symbols-outlined" style="font-size:20px;">public</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Verum Protocol. All rights reserved.</p>
+    <p>SECURE · IMMUTABLE · SOVEREIGN</p>
+  </div>
+</footer>
+<script src="../../js/modules/cursor.js"></script>
+<script src="../../js/modules/theme.js"></script>
+<script src="../../js/modules/mobile-nav.js"></script>
+<script src="../../js/modules/page-features.js"></script>
+<script src="../../js/init.js"></script>
+</body></html>
