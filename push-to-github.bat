@@ -1,9 +1,9 @@
 @echo off
 cd /d "d:\All Projects\stitch_verum_luxury_web3_platform"
 
-REM Copy home page to root (GitHub Pages needs index.html at root)
-echo Copying home page to root...
-copy "pages\home\index.html" "index.html" /Y
+REM Sync root index.html to home page
+echo Syncing index.html to pages/home...
+copy "index.html" "pages\home\index.html" /Y
 
 REM Configure git user
 git config user.email "dev@verum.web3"
@@ -13,7 +13,7 @@ REM Add all files
 git add .
 
 REM Commit
-git commit -m "feat: fix cursor, modularize JS, and move home page to root for GitHub Pages"
+git commit -m "feat: remove hard-3d animation from ecosystem cards, sync homepage"
 
 REM Set remote
 git remote add origin https://github.com/Zulqarnain-Wali/VERUM-with-LLMs.git 2>nul
