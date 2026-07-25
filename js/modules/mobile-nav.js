@@ -1,6 +1,6 @@
 /**
  * Verum Luxury - Mobile Navigation System
- * Handles hamburger menu and mobile drawer
+ * Handles hamburger menu and mobile drawer with enhanced UX
  */
 
 class MobileNav {
@@ -8,6 +8,7 @@ class MobileNav {
         this.hamburgerBtn = document.getElementById('hamburger');
         this.mobileNav = document.getElementById('mobile-nav');
         this.isOpen = false;
+        this.overlayClickListener = null;
         
         this.init();
     }
@@ -15,15 +16,30 @@ class MobileNav {
     init() {
         // Setup hamburger button
         if (this.hamburgerBtn) {
-            this.hamburgerBtn.addEventListener('click', () => this.toggle());
+            this.hamburgerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggle();
+            });
         }
         
         // Close drawer when clicking on a link
         if (this.mobileNav) {
             const links = this.mobileNav.querySelectorAll('a');
             links.forEach(link => {
-                link.addEventListener('click', () => this.close());
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.close();
+                });
             });
+            
+            // Close drawer when clicking close button
+            const closeBtn = this.mobileNav.querySelector('button');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.close();
+                });
+            }
         }
         
         // Close on escape key
@@ -55,6 +71,17 @@ class MobileNav {
         
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
+        
+        // Setup overlay click detection to close menu
+        if (!this.overlayClickListener) {
+            this.overlayClickListener = (e) => {
+                // Only close if clicking on the mobile-nav container itself (the transparent overlay)
+                if (e.target === this.mobileNav) {
+                    this.close();
+                }
+            };
+            this.mobileNav.addEventListener('click', this.overlayClickListener);
+        }
     }
     
     close() {
@@ -70,6 +97,12 @@ class MobileNav {
         
         // Restore body scroll
         document.body.style.overflow = '';
+        
+        // Remove overlay click listener
+        if (this.overlayClickListener && this.mobileNav) {
+            this.mobileNav.removeEventListener('click', this.overlayClickListener);
+            this.overlayClickListener = null;
+        }
     }
 }
 
