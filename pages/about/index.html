@@ -393,6 +393,14 @@ tailwind.config = {
 </footer>
 <script src="../../js/modules/cursor.js"></script>
 <script src="../../js/modules/theme.js"></script>
+<!-- Global function for mobile nav toggle (defined before module loads) -->
+<script>
+    function toggleMobileNav() {
+        if (window.mobileNav) {
+            window.mobileNav.toggle();
+        }
+    }
+</script>
 <script src="../../js/modules/mobile-nav.js"></script>
 <script src="../../js/modules/page-features.js"></script>
 <script src="../../js/init.js"></script>
