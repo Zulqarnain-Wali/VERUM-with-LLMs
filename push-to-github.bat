@@ -13,7 +13,7 @@ REM Add all files
 git add .
 
 REM Commit
-git commit -m "feat: remove hard-3d animation from ecosystem cards, sync homepage"
+git commit -m "feat: add mobile hamburger menu + shared.css link + modular js to root index.html"
 
 REM Set remote
 git remote add origin https://github.com/Zulqarnain-Wali/VERUM-with-LLMs.git 2>nul
