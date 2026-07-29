@@ -329,6 +329,58 @@ html.light .mobile-nav-drawer {
 }
 
 /* --------------------------------------------------------------------------
+   5. LUXURY GLASS CARD (REFINED)
+   -------------------------------------------------------------------------- */
+.glass-card {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.35s, border-color 0.35s;
+}
+html.light .glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Refined matte-glass finish for premium elements */
+.glass-card-luxury {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.light .glass-card-luxury {
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-left: 1px solid rgba(0, 0, 0, 0.07);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hover state for luxury glass cards */
+.glass-card-luxury:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 48px rgba(233, 195, 73, 0.15);
+}
+
+html.light .glass-card-luxury:hover {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 12px 48px rgba(184, 146, 12, 0.12);
+}
+
+html.light .glass-card-luxury:hover {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 12px 48px rgba(184, 146, 12, 0.12);
+}
+
+/* --------------------------------------------------------------------------
    5. GLASS CARD
    -------------------------------------------------------------------------- */
 .glass-card {
